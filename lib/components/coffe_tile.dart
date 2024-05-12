@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/pages/detail_product.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../models/coffe.dart';
+
 class CoffeTile extends StatelessWidget {
+  final Coffe coffe;
   const CoffeTile({
     super.key,
+    required this.coffe
   });
 
   @override
@@ -48,7 +52,7 @@ class CoffeTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
                         image: AssetImage(
-                            'assets/images/Double_Iced_Shaken_Latte.jpg'),
+                            coffe.imagePath),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -68,7 +72,7 @@ class CoffeTile extends StatelessWidget {
                         children: [
                           // Product Title
                           Text(
-                            'Double Iced Shaken Latte',
+                            coffe.name,
                             style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -81,7 +85,7 @@ class CoffeTile extends StatelessWidget {
         
                           // Description
                           Text(
-                            'Double Iced Shaken Latte',
+                            '${coffe.description.substring(0, 35)}...',
                             style: GoogleFonts.poppins(
                               fontSize: 11,
                             ),
@@ -100,7 +104,7 @@ class CoffeTile extends StatelessWidget {
                                     fontSize: 10, color: Color(0xFFA34B31)),
                               ),
                               Text(
-                                "33.000,-",
+                                "${coffe.price},-",
                                 style: GoogleFonts.poppins(
                                     fontSize: 16,
                                     color: Color(0xFFA34B31),

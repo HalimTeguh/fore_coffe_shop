@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/components/coffe_tile.dart';
-import 'package:fore_coffe_shop/pages/detail_product.dart';
+import 'package:fore_coffe_shop/models/coffe.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShopPage extends StatefulWidget {
@@ -30,13 +30,11 @@ class _ShopPageState extends State<ShopPage> {
               height: 20,
             ),
 
-            // Search 
+            // Search
             Container(
               padding: EdgeInsets.symmetric(horizontal: 18),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.white
-              ),
+                  borderRadius: BorderRadius.circular(30), color: Colors.white),
               child: TextField(
                 cursorColor: Color(0xff006041),
                 decoration: InputDecoration(
@@ -63,19 +61,27 @@ class _ShopPageState extends State<ShopPage> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
-                itemBuilder: (BuildContext context, index){
-                  return CoffeTile();
+                itemBuilder: (BuildContext context, index) {
+                  Coffe coffe = Coffe(
+                    name: 'Double Iced Shaken Latte',
+                    price: 33000,
+                    description:
+                        'Paduan klasik 2 shot espresso dengan susu dan krim',
+                    imagePath: 'assets/images/Double_Iced_Shaken_Latte.jpg',
+                  );
+                  return CoffeTile(
+                    coffe: coffe,
+                  );
                 },
               ),
             ),
 
-            SizedBox(height: 10,),
-
+            SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
