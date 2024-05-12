@@ -62,15 +62,9 @@ class _ShopPageState extends State<ShopPage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
                 itemBuilder: (BuildContext context, index) {
-                  Coffe coffe = Coffe(
-                    name: 'Double Iced Shaken Latte',
-                    price: 33000,
-                    description:
-                        'Paduan klasik 2 shot espresso dengan susu dan krim',
-                    imagePath: 'assets/images/Double_Iced_Shaken_Latte.jpg',
-                  );
+                  
                   return CoffeTile(
-                    coffe: coffe,
+                    coffe: Coffe(name: "name", price: 1, description: 'description', category: 'category', imagePath: 'imagePath'),
                   );
                 },
               ),
