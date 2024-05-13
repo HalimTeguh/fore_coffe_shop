@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../models/coffe.dart';
+
 class DetailProduct extends StatefulWidget {
-  const DetailProduct({super.key});
+  final Coffe coffe;
+  const DetailProduct({super.key, required this.coffe});
 
   @override
   State<DetailProduct> createState() => _DetailProductState();
@@ -13,16 +16,14 @@ class _DetailProductState extends State<DetailProduct> {
     return Scaffold(
       body: ListView(
         children: [
-
-            Hero(
-              tag: 'image_animation_Double_Iced_Shaken_Latte',
-              child: Image(
-                image: AssetImage('assets/images/Double_Iced_Shaken_Latte.jpg'),
-                fit: BoxFit.cover,
-                height: 300,
-              ),
+          Hero(
+            tag: widget.coffe.imagePath,
+            child: Image(
+              image: AssetImage(widget.coffe.imagePath),
+              fit: BoxFit.cover,
+              height: 300,
             ),
-          
+          ),
         ],
       ),
     );
