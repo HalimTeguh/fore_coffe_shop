@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/models/coffe.dart';
 
-class Cart {
+class Cart extends ChangeNotifier{
   // List of Coffe for sale
   List<Coffe> coffeShop = [
     Coffe(
@@ -50,7 +51,7 @@ class Cart {
       price: 19000,
       description: 'Ekstrak biji kopi Arabika murni tanpa campuran',
       category: "Coffe",
-      imagePath: 'assets/images/Hot_Esspresso.jpg',
+      imagePath: 'assets/images/Hot_Espresso.jpg',
     ),
     Coffe(
       name: "Hot Manuka Americano",
@@ -129,7 +130,6 @@ class Cart {
       category: "Americano",
       imagePath: 'assets/images/Triple_Peach_Americano.jpg',
     ),
-    
   ];
 
   // List of Coffe on user cart
@@ -148,10 +148,12 @@ class Cart {
   // add item to user cart
   void addCoffetoCart(Coffe coffe){
     userCart.add(coffe);
+    notifyListeners();
   }
 
   // remove item in user cart
   void removeCoffetoCart(Coffe coffe){
     userCart.remove(coffe);
+    notifyListeners();
   }
 }

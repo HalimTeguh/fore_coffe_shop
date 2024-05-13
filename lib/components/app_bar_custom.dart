@@ -3,10 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 AppBar appBarCustom() {
   return AppBar(
-    toolbarHeight: 100,
+    toolbarHeight: 80,
     leadingWidth: 0,
     leading: SizedBox(),
     backgroundColor: Color.fromARGB(255, 247, 247, 247),
+    surfaceTintColor: Color.fromARGB(255, 247, 247, 247),
+    elevation: 0,
+    shadowColor: Colors.black,
+    scrolledUnderElevation: 15,
     title: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
