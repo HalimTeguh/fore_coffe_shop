@@ -18,21 +18,21 @@ class _CartPageState extends State<CartPage> {
   double _left = 0;
 
   // if item is tapped
-  void addTap(){
+  void addTap() {
     setState(() {
       tap++;
     });
   }
 
   // if item is double tapped
-  void addDoubleTap(){
+  void addDoubleTap() {
     setState(() {
       doubeTap++;
     });
   }
 
   // if item is long pressed
-  void addLongpressTap(){
+  void addLongpressTap() {
     setState(() {
       longPress++;
     });
@@ -40,6 +40,11 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    if(_top == 0 && _left == 0){
+      centeredContainer();
+    }
+
     return Scaffold(
       body: Container(
         color: Colors.black12,
@@ -54,24 +59,21 @@ class _CartPageState extends State<CartPage> {
                 onTap: addTap,
                 onDoubleTap: addDoubleTap,
                 onLongPress: addLongpressTap,
-                onPanUpdate: (details){
+                onVerticalDragUpdate: (details) {
                   setState(() {
-                  _top = max(0, _top + details.delta.dy);
-                  _left = max(0, _left + details.delta.dx);
-                    
+                    _top = max(0, _top + details.delta.dy);
+                    // _left = max(0, _left + details.delta.dx);
                   });
                 },
                 child: Container(
                   height: boxSize,
                   width: boxSize,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.green
-                  ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.green),
                 ),
               ),
             ),
-        
             Container(
               padding: EdgeInsets.all(25),
               child: Row(
@@ -80,14 +82,19 @@ class _CartPageState extends State<CartPage> {
                   Text("Tap: $tap"),
                   Text("Double Tap: $doubeTap"),
                   Text("Long Tap: $longPress"),
-        
                 ],
               ),
             )
-        
           ],
         ),
       ),
     );
+  }
+
+  void centeredContainer() {
+    setState(() {
+      _top = (MediaQuery.of(context).size.height - boxSize) / 2 - 90;
+      _left = (MediaQuery.of(context).size.width - boxSize) / 2;
+    });
   }
 }

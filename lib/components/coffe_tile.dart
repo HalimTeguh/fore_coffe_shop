@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fore_coffe_shop/components/FormaterInteger.dart';
 import 'package:fore_coffe_shop/pages/detail_product.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -6,13 +7,16 @@ import '../models/coffe.dart';
 
 class CoffeTile extends StatelessWidget {
   final Coffe coffe;
-  const CoffeTile({
+  final FormaterInteger formatter = FormaterInteger();
+  CoffeTile({
     super.key,
-    required this.coffe
+    required this.coffe,
   });
 
   @override
   Widget build(BuildContext context) {
+    String priceFormat = formatter.priceFormat(coffe.price);
+
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
@@ -106,7 +110,7 @@ class CoffeTile extends StatelessWidget {
                                   fontSize: 10, color: Color(0xFFA34B31)),
                             ),
                             Text(
-                              "${coffe.price},-",
+                              "$priceFormat,-",
                               style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   color: Color(0xFFA34B31),
