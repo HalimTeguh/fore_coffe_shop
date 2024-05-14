@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/components/FormaterInteger.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import '../models/coffe.dart';
 
@@ -17,6 +16,10 @@ class DetailProduct extends StatefulWidget {
 
 class _DetailProductState extends State<DetailProduct> {
   FormaterInteger format = FormaterInteger();
+
+  int selectedSizeCoffe = 1;
+  List sizeCoffe = ['Small', 'Medium', 'Large'];
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -82,27 +85,6 @@ class _DetailProductState extends State<DetailProduct> {
                                   Icons.arrow_back_outlined,
                                   color: Colors.black,
                                 ),
-                              ),
-                            ),
-
-                            // Button Favorite
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: Offset(2, 2),
-                                    spreadRadius: 1,
-                                    blurRadius: 1,
-                                  ),
-                                ],
-                              ),
-                              child: Icon(
-                                Icons.favorite_outline,
-                                color: Colors.black,
                               ),
                             ),
                           ],
@@ -190,7 +172,7 @@ class _DetailProductState extends State<DetailProduct> {
                     ),
                   ),
 
-                  // Detail Productt Container
+                  // Detail Product Container
                   Container(
                     height: 500,
                     padding: EdgeInsets.all(30),
@@ -253,19 +235,30 @@ class _DetailProductState extends State<DetailProduct> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 15),
-                                decoration: BoxDecoration(
-                                    color: Color(0xff006041),
-                                    borderRadius: BorderRadius.circular(40)),
-                                child: Text(
-                                  "Small",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    color: Colors.white,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedSizeCoffe = 1;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 15),
+                                  decoration: BoxDecoration(
+                                      color: (selectedSizeCoffe == 1)
+                                          ? Color(0xff006041)
+                                          : Colors.black12,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Text(
+                                    "Small",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: (selectedSizeCoffe == 1)
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
@@ -273,19 +266,30 @@ class _DetailProductState extends State<DetailProduct> {
                               width: 10,
                             ),
                             Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 15),
-                                decoration: BoxDecoration(
-                                    color: Colors.black12,
-                                    borderRadius: BorderRadius.circular(40)),
-                                child: Text(
-                                  "Medium",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    color: Colors.black,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedSizeCoffe = 2;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 15),
+                                  decoration: BoxDecoration(
+                                      color: (selectedSizeCoffe == 2)
+                                          ? Color(0xff006041)
+                                          : Colors.black12,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Text(
+                                    "Medium",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: (selectedSizeCoffe == 2)
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
@@ -293,19 +297,30 @@ class _DetailProductState extends State<DetailProduct> {
                               width: 10,
                             ),
                             Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 15),
-                                decoration: BoxDecoration(
-                                    color: Colors.black12,
-                                    borderRadius: BorderRadius.circular(40)),
-                                child: Text(
-                                  "Large",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    color: Colors.black,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedSizeCoffe = 3;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 15),
+                                  decoration: BoxDecoration(
+                                      color: (selectedSizeCoffe == 3)
+                                          ? Color(0xff006041)
+                                          : Colors.black12,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Text(
+                                    "Large",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: (selectedSizeCoffe == 3)
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
