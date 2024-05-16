@@ -71,12 +71,13 @@ class _ShopPageState extends State<ShopPage> {
                     Coffe coffe = value.getCoffeList()[index];
 
                     // Display Coffe if that coffe is Americano
-                    if (coffe.category != "Americano") {
+                    if (coffe.category == "Americano") {
+                      return CoffeTile(
+                        coffe: coffe,
+                      );
+                    } else {
                       return Container();
                     }
-                    return CoffeTile(
-                      coffe: coffe,
-                    );
                   },
                 ),
               ),
@@ -99,10 +100,11 @@ class _ShopPageState extends State<ShopPage> {
                   itemBuilder: (BuildContext context, index) {
                     Coffe coffe = value.getCoffeList()[index];
 
-                    if (coffe.category != "Coffe") {
+                    if (coffe.category == "Coffe") {
+                      return CoffeTileLandscape(coffe: coffe);
+                    } else {
                       return Container();
                     }
-                    return CoffeTileLandscape(coffe: coffe);
                   },
                 ),
               ),
@@ -117,4 +119,3 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 }
-

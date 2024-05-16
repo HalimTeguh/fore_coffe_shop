@@ -147,12 +147,14 @@ class Cart extends ChangeNotifier{
 
   // add item to user cart
   void addCoffetoCart(Coffe coffe){
+    print("adding ${coffe.name}, ${coffe.price}");
     userCart.add(coffe);
     notifyListeners();
   }
 
   // remove item in user cart
   void removeCoffetoCart(Coffe coffe){
+    print("removing ${coffe.name}, ${coffe.price}");
     userCart.remove(coffe);
     notifyListeners();
   }

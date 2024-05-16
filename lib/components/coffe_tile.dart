@@ -3,21 +3,57 @@ import 'package:fore_coffe_shop/components/FormaterInteger.dart';
 import 'package:fore_coffe_shop/models/cart.dart';
 import 'package:fore_coffe_shop/pages/detail_product.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../models/coffe.dart';
 
-class CoffeTile extends StatelessWidget {
+class CoffeTile extends StatefulWidget {
   final Coffe coffe;
-  final FormaterInteger formatter = FormaterInteger();
-  final Cart userCart = Cart();
+
   CoffeTile({
     super.key,
     required this.coffe,
   });
 
   @override
+  State<CoffeTile> createState() => _CoffeTileState();
+}
+
+class _CoffeTileState extends State<CoffeTile> {
+  final FormaterInteger formatter = FormaterInteger();
+
+  void addCoffetoCart() {
+    
+    Provider.of<Cart>(context, listen: false).addCoffetoCart(widget.coffe);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Color(0xff006041),
+          title: Text(
+            "Successfully added!",
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
+          content: Text(
+            "Check your cart",
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              color: Colors.white,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String priceFormat = formatter.priceFormat(coffe.price);
+    String priceFormat = formatter.priceFormat(widget.coffe.price);
 
     return InkWell(
       onTap: () {
@@ -25,7 +61,7 @@ class CoffeTile extends StatelessWidget {
           MaterialPageRoute(
             builder: (BuildContext context) {
               return DetailProduct(
-                coffe: coffe,
+                coffe: widget.coffe,
               );
             },
           ),
@@ -52,14 +88,15 @@ class CoffeTile extends StatelessWidget {
           children: [
             // Product Image
             Hero(
-              tag: coffe.imagePath,
+              tag: widget.coffe.imagePath,
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        image: AssetImage(coffe.imagePath), fit: BoxFit.cover),
+                        image: AssetImage(widget.coffe.imagePath),
+                        fit: BoxFit.cover),
                   ),
                 ),
               ),
@@ -80,7 +117,7 @@ class CoffeTile extends StatelessWidget {
                       children: [
                         // Product Title
                         Text(
-                          coffe.name,
+                          widget.coffe.name,
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -93,7 +130,7 @@ class CoffeTile extends StatelessWidget {
 
                         // Description
                         Text(
-                          '${coffe.description.substring(0, 35)}...',
+                          '${widget.coffe.description.substring(0, 35)}...',
                           style: GoogleFonts.poppins(
                             fontSize: 11,
                           ),
@@ -132,30 +169,7 @@ class CoffeTile extends StatelessWidget {
                             color: Colors.white,
                             iconSize: 20,
                             onPressed: () {
-                              userCart.addCoffetoCart(coffe);
-
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      backgroundColor: Color(0xff006041),
-                                      title: Text(
-                                        "Successfully added!",
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      content: Text(
-                                        "Check your cart",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 14,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    );
-                                  });
+                              addCoffetoCart();
                             },
                             icon: Icon(
                               Icons.add,

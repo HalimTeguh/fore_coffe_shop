@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/components/FormaterInteger.dart';
 import 'package:fore_coffe_shop/models/cart.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../models/coffe.dart';
 
@@ -23,8 +24,6 @@ class _DetailProductState extends State<DetailProduct> {
   bool isFavorite = false;
 
   double animatedShadowHeight = 200;
-
-  Cart userCart = Cart();
 
   @override
   void initState() {
@@ -238,117 +237,6 @@ class _DetailProductState extends State<DetailProduct> {
                               ),
                             ),
 
-                            // SizedBox(
-                            //   height: 30,
-                            // ),
-
-                            // Size of Coffe
-                            // Text(
-                            //   "Coffe Size",
-                            //   style: GoogleFonts.poppins(
-                            //       fontSize: 20, fontWeight: FontWeight.bold),
-                            // ),
-                            // SizedBox(
-                            //   height: 10,
-                            // ),
-
-                            // Select the Size Custom
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                            //     Expanded(
-                            //       child: GestureDetector(
-                            //         onTap: () {
-                            //           setState(() {
-                            //             selectedSizeCoffe = 1;
-                            //           });
-                            //         },
-                            //         child: Container(
-                            //           padding: EdgeInsets.symmetric(
-                            //               horizontal: 30, vertical: 15),
-                            //           decoration: BoxDecoration(
-                            //               color: (selectedSizeCoffe == 1)
-                            //                   ? Color(0xff006041)
-                            //                   : Colors.black12,
-                            //               borderRadius: BorderRadius.circular(40)),
-                            //           child: Text(
-                            //             "Small",
-                            //             style: GoogleFonts.poppins(
-                            //               fontSize: 12,
-                            //               color: (selectedSizeCoffe == 1)
-                            //                   ? Colors.white
-                            //                   : Colors.black,
-                            //             ),
-                            //             textAlign: TextAlign.center,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 10,
-                            //     ),
-                            //     Expanded(
-                            //       child: GestureDetector(
-                            //         onTap: () {
-                            //           setState(() {
-                            //             selectedSizeCoffe = 2;
-                            //           });
-                            //         },
-                            //         child: Container(
-                            //           padding: EdgeInsets.symmetric(
-                            //               horizontal: 30, vertical: 15),
-                            //           decoration: BoxDecoration(
-                            //               color: (selectedSizeCoffe == 2)
-                            //                   ? Color(0xff006041)
-                            //                   : Colors.black12,
-                            //               borderRadius: BorderRadius.circular(40)),
-                            //           child: Text(
-                            //             "Medium",
-                            //             style: GoogleFonts.poppins(
-                            //               fontSize: 12,
-                            //               color: (selectedSizeCoffe == 2)
-                            //                   ? Colors.white
-                            //                   : Colors.black,
-                            //             ),
-                            //             textAlign: TextAlign.center,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     SizedBox(
-                            //       width: 10,
-                            //     ),
-                            //     Expanded(
-                            //       child: GestureDetector(
-                            //         onTap: () {
-                            //           setState(() {
-                            //             selectedSizeCoffe = 3;
-                            //           });
-                            //         },
-                            //         child: Container(
-                            //           padding: EdgeInsets.symmetric(
-                            //               horizontal: 30, vertical: 15),
-                            //           decoration: BoxDecoration(
-                            //               color: (selectedSizeCoffe == 3)
-                            //                   ? Color(0xff006041)
-                            //                   : Colors.black12,
-                            //               borderRadius: BorderRadius.circular(40)),
-                            //           child: Text(
-                            //             "Large",
-                            //             style: GoogleFonts.poppins(
-                            //               fontSize: 12,
-                            //               color: (selectedSizeCoffe == 3)
-                            //                   ? Colors.white
-                            //                   : Colors.black,
-                            //             ),
-                            //             textAlign: TextAlign.center,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-
                             SizedBox(
                               height: 30,
                             ),
@@ -376,7 +264,8 @@ class _DetailProductState extends State<DetailProduct> {
                         // Button Add to Cart
                         GestureDetector(
                           onTap: () {
-                            userCart.addCoffetoCart(widget.coffe);
+                            Provider.of<Cart>(context, listen: false)
+                                    .addCoffetoCart(widget.coffe);
 
                             showDialog(
                                 context: context,

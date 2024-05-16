@@ -1,6 +1,10 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:fore_coffe_shop/components/cart_tile.dart';
+import 'package:fore_coffe_shop/models/cart.dart';
+import 'package:fore_coffe_shop/models/coffe.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -10,91 +14,33 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  double boxSize = 100;
-  int tap = 0;
-  int doubeTap = 0;
-  int longPress = 0;
-  double _top = 0;
-  double _left = 0;
-
-  // if item is tapped
-  void addTap() {
-    setState(() {
-      tap++;
-    });
-  }
-
-  // if item is double tapped
-  void addDoubleTap() {
-    setState(() {
-      doubeTap++;
-    });
-  }
-
-  // if item is long pressed
-  void addLongpressTap() {
-    setState(() {
-      longPress++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-
-    if(_top == 0 && _left == 0){
-      centeredContainer();
-    }
-
-    return Scaffold(
-      body: Container(
-        color: Colors.black12,
-        height: double.infinity,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Positioned(
-              top: _top,
-              left: _left,
-              child: GestureDetector(
-                onTap: addTap,
-                onDoubleTap: addDoubleTap,
-                onLongPress: addLongpressTap,
-                onVerticalDragUpdate: (details) {
-                  setState(() {
-                    _top = max(0, _top + details.delta.dy);
-                    // _left = max(0, _left + details.delta.dx);
-                  });
-                },
-                child: Container(
-                  height: boxSize,
-                  width: boxSize,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.green),
-                ),
-              ),
+    return Consumer<Cart>(builder: (context, value, child) => Container(
+      padding: EdgeInsets.all(25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            (value.getUserCart().length > 0) ? "My Cart (${value.getUserCart().length})" : "My Cart",
+            style: GoogleFonts.poppins(
+                fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: value.getUserCart().length,
+              itemBuilder: (context, index) {
+                Coffe coffe = value.getUserCart()[index];
+            
+                return CartTile(coffe: coffe);
+              },
             ),
-            Container(
-              padding: EdgeInsets.all(25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("Tap: $tap"),
-                  Text("Double Tap: $doubeTap"),
-                  Text("Long Tap: $longPress"),
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
-
-  void centeredContainer() {
-    setState(() {
-      _top = (MediaQuery.of(context).size.height - boxSize) / 2 - 90;
-      _left = (MediaQuery.of(context).size.width - boxSize) / 2;
-    });
+    ));
   }
 }
