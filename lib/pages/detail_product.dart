@@ -21,6 +21,20 @@ class _DetailProductState extends State<DetailProduct> {
   List sizeCoffe = ['Small', 'Medium', 'Large'];
   bool isFavorite = false;
 
+  double animatedShadowHeight = 200;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        animatedShadowHeight += 300;
+      });
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     String priceFormat = format.priceFormat(widget.coffe.price);
@@ -96,8 +110,10 @@ class _DetailProductState extends State<DetailProduct> {
               ),
 
               // Shadow Image
-              Container(
-                height: 500,
+              AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                curve: Curves.easeOut,
+                height: animatedShadowHeight,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   // border: Border.all(color: Colors.black),
@@ -184,176 +200,177 @@ class _DetailProductState extends State<DetailProduct> {
                       ),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Category Product
-                        Container(
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: Colors.black12),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Icon
-                              Icon(
-                                Icons.coffee_rounded,
-                                color: Color(0xFFA34B31),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-
-                              // Text
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Text(
-                                  widget.coffe.category,
-                                  style: GoogleFonts.poppins(fontSize: 14),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 30,
-                        ),
-
-                        // Size of Coffe
-                        Text(
-                          "Coffe Size",
-                          style: GoogleFonts.poppins(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        // Select the Size Custom
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedSizeCoffe = 1;
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 15),
-                                  decoration: BoxDecoration(
-                                      color: (selectedSizeCoffe == 1)
-                                          ? Color(0xff006041)
-                                          : Colors.black12,
-                                      borderRadius: BorderRadius.circular(40)),
-                                  child: Text(
-                                    "Small",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: (selectedSizeCoffe == 1)
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.black12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Icon
+                                  Icon(
+                                    Icons.coffee_rounded,
+                                    color: Color(0xFFA34B31),
                                   ),
-                                ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+
+                                  // Text
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Text(
+                                      widget.coffe.category,
+                                      style: GoogleFonts.poppins(fontSize: 14),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
+
+                            // SizedBox(
+                            //   height: 30,
+                            // ),
+
+                            // Size of Coffe
+                            // Text(
+                            //   "Coffe Size",
+                            //   style: GoogleFonts.poppins(
+                            //       fontSize: 20, fontWeight: FontWeight.bold),
+                            // ),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
+
+                            // Select the Size Custom
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Expanded(
+                            //       child: GestureDetector(
+                            //         onTap: () {
+                            //           setState(() {
+                            //             selectedSizeCoffe = 1;
+                            //           });
+                            //         },
+                            //         child: Container(
+                            //           padding: EdgeInsets.symmetric(
+                            //               horizontal: 30, vertical: 15),
+                            //           decoration: BoxDecoration(
+                            //               color: (selectedSizeCoffe == 1)
+                            //                   ? Color(0xff006041)
+                            //                   : Colors.black12,
+                            //               borderRadius: BorderRadius.circular(40)),
+                            //           child: Text(
+                            //             "Small",
+                            //             style: GoogleFonts.poppins(
+                            //               fontSize: 12,
+                            //               color: (selectedSizeCoffe == 1)
+                            //                   ? Colors.white
+                            //                   : Colors.black,
+                            //             ),
+                            //             textAlign: TextAlign.center,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 10,
+                            //     ),
+                            //     Expanded(
+                            //       child: GestureDetector(
+                            //         onTap: () {
+                            //           setState(() {
+                            //             selectedSizeCoffe = 2;
+                            //           });
+                            //         },
+                            //         child: Container(
+                            //           padding: EdgeInsets.symmetric(
+                            //               horizontal: 30, vertical: 15),
+                            //           decoration: BoxDecoration(
+                            //               color: (selectedSizeCoffe == 2)
+                            //                   ? Color(0xff006041)
+                            //                   : Colors.black12,
+                            //               borderRadius: BorderRadius.circular(40)),
+                            //           child: Text(
+                            //             "Medium",
+                            //             style: GoogleFonts.poppins(
+                            //               fontSize: 12,
+                            //               color: (selectedSizeCoffe == 2)
+                            //                   ? Colors.white
+                            //                   : Colors.black,
+                            //             ),
+                            //             textAlign: TextAlign.center,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     SizedBox(
+                            //       width: 10,
+                            //     ),
+                            //     Expanded(
+                            //       child: GestureDetector(
+                            //         onTap: () {
+                            //           setState(() {
+                            //             selectedSizeCoffe = 3;
+                            //           });
+                            //         },
+                            //         child: Container(
+                            //           padding: EdgeInsets.symmetric(
+                            //               horizontal: 30, vertical: 15),
+                            //           decoration: BoxDecoration(
+                            //               color: (selectedSizeCoffe == 3)
+                            //                   ? Color(0xff006041)
+                            //                   : Colors.black12,
+                            //               borderRadius: BorderRadius.circular(40)),
+                            //           child: Text(
+                            //             "Large",
+                            //             style: GoogleFonts.poppins(
+                            //               fontSize: 12,
+                            //               color: (selectedSizeCoffe == 3)
+                            //                   ? Colors.white
+                            //                   : Colors.black,
+                            //             ),
+                            //             textAlign: TextAlign.center,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+
                             SizedBox(
-                              width: 10,
+                              height: 30,
                             ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedSizeCoffe = 2;
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 15),
-                                  decoration: BoxDecoration(
-                                      color: (selectedSizeCoffe == 2)
-                                          ? Color(0xff006041)
-                                          : Colors.black12,
-                                      borderRadius: BorderRadius.circular(40)),
-                                  child: Text(
-                                    "Medium",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: (selectedSizeCoffe == 2)
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
+
+                            // Description of Coffe
+                            Text(
+                              "About",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
-                              width: 10,
+                              height: 10,
                             ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedSizeCoffe = 3;
-                                  });
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 15),
-                                  decoration: BoxDecoration(
-                                      color: (selectedSizeCoffe == 3)
-                                          ? Color(0xff006041)
-                                          : Colors.black12,
-                                      borderRadius: BorderRadius.circular(40)),
-                                  child: Text(
-                                    "Large",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: (selectedSizeCoffe == 3)
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+
+                            // Description
+                            Text(
+                              widget.coffe.description,
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
                               ),
                             ),
                           ],
                         ),
 
-                        SizedBox(
-                          height: 30,
-                        ),
-
-                        // Description of Coffe
-                        Text(
-                          "About",
-                          style: GoogleFonts.poppins(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        // Description
-                        Text(
-                          widget.coffe.description,
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                          ),
-                        ),
-
                         // Button Add to Cart
-                        SizedBox(
-                          height: 30,
-                        ),
-
                         Container(
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
@@ -364,7 +381,7 @@ class _DetailProductState extends State<DetailProduct> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Expanded(
-                                  flex: 2,
+                                  flex: 3,
                                   child: Text(
                                     "Add to cart",
                                     textAlign: TextAlign.center,
@@ -381,9 +398,11 @@ class _DetailProductState extends State<DetailProduct> {
                                   thickness: 3, //thickness of divier line
                                 ),
                                 Expanded(
+                                  flex: 2,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                     
                                       Text(
                                         "Rp",
                                         textAlign: TextAlign.center,
