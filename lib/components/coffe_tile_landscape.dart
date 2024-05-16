@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/components/FormaterInteger.dart';
+import 'package:fore_coffe_shop/models/cart.dart';
 import 'package:fore_coffe_shop/pages/detail_product.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,6 +9,7 @@ import '../models/coffe.dart';
 class CoffeTileLandscape extends StatelessWidget {
   final Coffe coffe;
   final FormaterInteger formatter = FormaterInteger();
+  final Cart userCart = Cart();
   CoffeTileLandscape({
     super.key,
     required this.coffe,
@@ -131,7 +133,32 @@ class CoffeTileLandscape extends StatelessWidget {
                         child: IconButton(
                           color: Colors.white,
                           iconSize: 20,
-                          onPressed: () {},
+                          onPressed: () {
+                            userCart.addCoffetoCart(coffe);
+
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: Color(0xff006041),
+                                    title: Text(
+                                      "Successfully added!",
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    content: Text(
+                                      "Check your cart",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
                           icon: Icon(
                             Icons.add,
                           ),

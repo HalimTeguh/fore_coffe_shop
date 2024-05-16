@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/components/FormaterInteger.dart';
+import 'package:fore_coffe_shop/models/cart.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../models/coffe.dart';
@@ -22,6 +23,8 @@ class _DetailProductState extends State<DetailProduct> {
   bool isFavorite = false;
 
   double animatedShadowHeight = 200;
+
+  Cart userCart = Cart();
 
   @override
   void initState() {
@@ -371,61 +374,89 @@ class _DetailProductState extends State<DetailProduct> {
                         ),
 
                         // Button Add to Cart
-                        Container(
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Color(0xff006041),
-                              borderRadius: BorderRadius.circular(40)),
-                          child: IntrinsicHeight(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    "Add to cart",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            userCart.addCoffetoCart(widget.coffe);
+
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: Color(0xff006041),
+                                    title: Text(
+                                      "Successfully added!",
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    content: Text(
+                                      "Check your cart",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                                color: Color(0xff006041),
+                                borderRadius: BorderRadius.circular(40)),
+                            child: IntrinsicHeight(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Text(
+                                      "Add to cart",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                VerticalDivider(
-                                  color: Colors.white, //color of divider
-                                  width: 10, //width space of divider
-                                  thickness: 3, //thickness of divier line
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                     
-                                      Text(
-                                        "Rp",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "$priceFormat,-",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
+                                  VerticalDivider(
+                                    color: Colors.white, //color of divider
+                                    width: 10, //width space of divider
+                                    thickness: 3, //thickness of divier line
                                   ),
-                                ),
-                              ],
+                                  Expanded(
+                                    flex: 2,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Rp",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          "$priceFormat,-",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fore_coffe_shop/components/FormaterInteger.dart';
+import 'package:fore_coffe_shop/models/cart.dart';
 import 'package:fore_coffe_shop/pages/detail_product.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,6 +9,7 @@ import '../models/coffe.dart';
 class CoffeTile extends StatelessWidget {
   final Coffe coffe;
   final FormaterInteger formatter = FormaterInteger();
+  final Cart userCart = Cart();
   CoffeTile({
     super.key,
     required this.coffe,
@@ -22,7 +24,9 @@ class CoffeTile extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return DetailProduct(coffe: coffe,);
+              return DetailProduct(
+                coffe: coffe,
+              );
             },
           ),
         );
@@ -55,9 +59,7 @@ class CoffeTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        image: AssetImage(
-                            coffe.imagePath),
-                        fit: BoxFit.cover),
+                        image: AssetImage(coffe.imagePath), fit: BoxFit.cover),
                   ),
                 ),
               ),
@@ -65,7 +67,7 @@ class CoffeTile extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-      
+
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 6),
@@ -84,11 +86,11 @@ class CoffeTile extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-      
+
                         SizedBox(
                           height: 2,
                         ),
-      
+
                         // Description
                         Text(
                           '${coffe.description.substring(0, 35)}...',
@@ -118,7 +120,7 @@ class CoffeTile extends StatelessWidget {
                             ),
                           ],
                         ),
-      
+
                         // Button add to Cart
                         Container(
                           height: 35,
@@ -129,7 +131,32 @@ class CoffeTile extends StatelessWidget {
                           child: IconButton(
                             color: Colors.white,
                             iconSize: 20,
-                            onPressed: () {},
+                            onPressed: () {
+                              userCart.addCoffetoCart(coffe);
+
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      backgroundColor: Color(0xff006041),
+                                      title: Text(
+                                        "Successfully added!",
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      content: Text(
+                                        "Check your cart",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    );
+                                  });
+                            },
                             icon: Icon(
                               Icons.add,
                             ),
